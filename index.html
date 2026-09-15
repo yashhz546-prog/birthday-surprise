@@ -1,1 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Happy Birthday 🎂</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main id="app">
+
+        <!-- OPENING -->
+        <section id="opening" class="screen active">
+
+            <div class="content">
+
+                <p class="small-text">
+                    Someone made something for you...
+                </p>
+
+                <div class="gift-icon">🎁</div>
+
+                <button onclick="goToScreen('birthday')">
+                    Enter ✨
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN BIRTHDAY -->
+        <section id="birthday" class="screen">
+
+            <div class="content">
+
+                <p class="small-text">
+                    Today is your day
+                </p>
+
+                <h1>
+                    Happy Birthday! 🎂
+                </h1>
+
+                <div class="balloons">
+
+                    <span>🎈</span>
+                    <span>🎈</span>
+                    <span>🎈</span>
+                    <span>🎈</span>
+
+                </div>
+
+                <button onclick="goToScreen('surprise')">
+                    Surprise 🎁
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- BALLOON SURPRISE -->
+        <section id="surprise" class="screen">
+
+            <div class="rising-balloons">
+
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+
+            </div>
+
+            <div class="content">
+
+                <button onclick="goToScreen('memories')">
+                    CLICK ME 👀
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMORIES -->
+        <section id="memories" class="screen">
+
+            <div class="content">
+
+                <h1>
+                    Our Memories 📸
+                </h1>
+
+                <p class="small-text">
+                    Some moments worth remembering...
+                </p>
+
+                <div class="photo-placeholder">
+                    📸
+                </div>
+
+                <button onclick="goToScreen('messages')">
+                    Continue 💌
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERSONAL MESSAGES -->
+        <section id="messages" class="screen">
+
+            <div class="content">
+
+                <h1>
+                    A Few Things I Wanted To Say 💌
+                </h1>
+
+                <div class="envelope">
+                    💌
+                </div>
+
+                <button onclick="goToScreen('gift-intro')">
+                    Open me 👀
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- YOU THOUGHT THAT WAS IT -->
+        <section id="gift-intro" class="screen">
+
+            <div class="content">
+
+                <h1>
+                    You thought that was it?
+                </h1>
+
+                <p class="big-text">
+                    NOPE. 💀
+                </p>
+
+                <button onclick="goToScreen('gift')">
+                    There's one more thing 🎁
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- GIFT -->
+        <section id="gift" class="screen">
+
+            <div class="content">
+
+                <div class="gift-box" onclick="openGift()">
+                    🎁
+                </div>
+
+                <p class="small-text">
+                    Tap the gift
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAKE -->
+        <section id="cake" class="screen">
+
+            <div class="graffiti"></div>
+
+            <div class="content cake-content">
+
+                <div id="cake-object" onclick="cakeClicked()">
+                    🎂
+                </div>
+
+                <h1>
+                    Enjoy your bday beautiful 💗
+                </h1>
+
+                <h2>
+                    Mwuahh 💋
+                </h2>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINALE -->
+        <section id="finale" class="screen">
+
+            <div class="content">
+
+                <h1>
+                    Don't click this. 👀
+                </h1>
+
+                <button id="magicButton" onclick="magicClick()">
+                    DO NOT CLICK
+                </button>
+
+                <div id="magicMessage"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BYE -->
+        <section id="bye" class="screen">
+
+            <div class="content">
+
+                <h1>
+                    Bye 👋
+                </h1>
+
+                <p>
+                    And once again...
+                </p>
+
+                <h2>
+                    Happy Birthday! 🎂💗
+                </h2>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
