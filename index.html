@@ -36,34 +36,49 @@
         <!-- MAIN BIRTHDAY -->
         <section id="birthday" class="screen">
 
-            <div class="content">
+    <div class="birthday-glow glow-one"></div>
+    <div class="birthday-glow glow-two"></div>
 
-                <p class="small-text">
-                    Today is your day
-                </p>
+    <!-- Floating decorations -->
+    <div class="birthday-decoration decor-one">✦</div>
+    <div class="birthday-decoration decor-two">✧</div>
+    <div class="birthday-decoration decor-three">♡</div>
+    <div class="birthday-decoration decor-four">✦</div>
 
-                <h1>
-                    Happy Birthday! 🎂
-                </h1>
+    <!-- Balloons -->
+    <div class="birthday-balloon balloon-pink">🎈</div>
+    <div class="birthday-balloon balloon-yellow">🎈</div>
+    <div class="birthday-balloon balloon-blue">🎈</div>
+    <div class="birthday-balloon balloon-purple">🎈</div>
 
-                <div class="balloons">
+    <div class="birthday-content">
 
-                    <span>🎈</span>
-                    <span>🎈</span>
-                    <span>🎈</span>
-                    <span>🎈</span>
+        <div class="birthday-mini">
+            TODAY IS YOUR DAY ✨
+        </div>
 
-                </div>
+        <h1 class="birthday-title">
+            Happy Birthday!
+        </h1>
 
-                <button onclick="goToScreen('surprise')">
-                    Surprise 🎁
-                </button>
+        <div class="birthday-cake">
+            🎂
+        </div>
 
-            </div>
+        <p class="birthday-subtitle">
+            A little surprise has been waiting for you...
+        </p>
 
-        </section>
+        <button
+            class="birthday-surprise-btn"
+            onclick="goToScreen('surprise')"
+        >
+            Open Your Surprise ✨
+        </button>
 
+    </div>
 
+</section>
         <!-- BALLOON SURPRISE -->
         <section id="surprise" class="screen">
 
