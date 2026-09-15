@@ -1,6 +1,6 @@
-// ===============================
+// ==========================================
 // SCREEN NAVIGATION
-// ===============================
+// ==========================================
 
 function goToScreen(screenId) {
     document.querySelectorAll(".screen").forEach(screen => {
@@ -16,16 +16,15 @@ function goToScreen(screenId) {
 }
 
 
-// ===============================
-// 🎁 GIFT BOX
-// ===============================
+// ==========================================
+// 🎁 OPEN GIFT
+// ==========================================
 
 function openGift() {
     const gift = document.querySelector(".gift-box");
 
     if (!gift) return;
 
-    // Shake the gift
     gift.classList.add("gift-shake");
 
     setTimeout(() => {
@@ -35,144 +34,127 @@ function openGift() {
 }
 
 
-// ===============================
-// 🎂 CAKE + GRAFFITI
-// ===============================
-
-function createGraffiti() {
-    const graffiti = document.querySelector(".graffiti");
-
-    if (!graffiti) return;
-
-    graffiti.innerHTML = "";
-
-    const words = [
-        "HAPPY BIRTHDAY 💗",
-        "Mwuahh 💋",
-        "✨",
-        "🎉",
-        "💗",
-        "🥳",
-        "HAPPY BDAY",
-        "💯",
-        "🎂",
-        "✨",
-        "Mwuahh 💋",
-        "💗"
-    ];
-
-    for (let i = 0; i < 35; i++) {
-        const item = document.createElement("span");
-
-        item.textContent =
-            words[Math.floor(Math.random() * words.length)];
-
-        item.style.left = Math.random() * 100 + "%";
-        item.style.top = Math.random() * 100 + "%";
-
-        item.style.fontSize =
-            (12 + Math.random() * 25) + "px";
-
-        item.style.transform =
-            `rotate(${Math.random() * 60 - 30}deg)`;
-
-        item.style.animationDelay =
-            (Math.random() * 2) + "s";
-
-        graffiti.appendChild(item);
-    }
-}
-
-
-// ===============================
+// ==========================================
 // 🎂 CAKE CLICK
-// ===============================
+// ==========================================
 
 function cakeClicked() {
     const cake = document.getElementById("cake-object");
 
     if (!cake) return;
 
-    // Prevent multiple clicks
     cake.style.pointerEvents = "none";
 
-    // Cake shrinks away
-    cake.style.transform = "scale(0) rotate(15deg)";
+    // Cake disappears
+    cake.style.transition = "all 0.8s ease";
+    cake.style.transform = "scale(0) rotate(20deg)";
     cake.style.opacity = "0";
 
     setTimeout(() => {
-
         cake.style.display = "none";
 
-        // Create the birthday graffiti wall
+        // Hide the original cake message
+        const cakeMessage =
+            document.querySelector("#cake h2");
+
+        if (cakeMessage) {
+            cakeMessage.style.display = "none";
+        }
+
+        // Start birthday graffiti
         createBirthdayWall();
 
-    }, 700);
+    }, 800);
 }
 
 
-// ===============================
+// ==========================================
 // 💗 BIRTHDAY GRAFFITI WALL
-// ===============================
+// ==========================================
 
 function createBirthdayWall() {
-    const cakeScreen = document.getElementById("cake");
+
+    const cakeScreen =
+        document.getElementById("cake");
 
     if (!cakeScreen) return;
 
-    // Remove old graffiti
-    const oldWall = document.getElementById("birthday-wall");
+    // Remove previous elements
+    const oldWall =
+        document.getElementById("birthday-wall");
 
-    if (oldWall) {
-        oldWall.remove();
-    }
+    const oldConfetti =
+        document.getElementById("birthday-confetti");
 
-    const wall = document.createElement("div");
+    const oldContinue =
+        document.getElementById("graffiti-continue");
+
+    if (oldWall) oldWall.remove();
+    if (oldConfetti) oldConfetti.remove();
+    if (oldContinue) oldContinue.remove();
+
+
+    // ======================================
+    // MESSAGE WALL
+    // ======================================
+
+    const wall =
+        document.createElement("div");
 
     wall.id = "birthday-wall";
 
-    // Make sure it covers the whole screen
-    wall.style.position = "absolute";
+    wall.style.position = "fixed";
     wall.style.inset = "0";
+    wall.style.width = "100vw";
+    wall.style.height = "100vh";
     wall.style.overflow = "hidden";
-    wall.style.zIndex = "20";
+    wall.style.zIndex = "100";
     wall.style.pointerEvents = "none";
 
     cakeScreen.appendChild(wall);
+
 
     const messages = [
         "Enjoy your bday beautiful 💗",
         "Mwuahh 💋"
     ];
 
-    // Lots of floating messages
-    for (let i = 0; i < 45; i++) {
 
-        const text = document.createElement("div");
+    for (let i = 0; i < 50; i++) {
+
+        const text =
+            document.createElement("div");
 
         text.textContent =
-            messages[i % messages.length];
+            messages[
+                Math.floor(
+                    Math.random() * messages.length
+                )
+            ];
 
         text.style.position = "absolute";
 
         text.style.left =
-            Math.random() * 100 + "%";
+            Math.random() * 100 + "vw";
 
         text.style.top =
-            Math.random() * 100 + "%";
+            Math.random() * 100 + "vh";
 
         text.style.fontSize =
-            (12 + Math.random() * 22) + "px";
+            (14 + Math.random() * 25) + "px";
 
         text.style.fontWeight = "800";
 
         text.style.whiteSpace = "nowrap";
 
+        text.style.textShadow =
+            "0 3px 15px rgba(0,0,0,0.25)";
+
         text.style.transform =
             `translate(-50%, -50%) rotate(${Math.random() * 70 - 35}deg)`;
 
         text.style.opacity =
-            0.55 + Math.random() * 0.45;
+            0.6 + Math.random() * 0.4;
 
         text.style.animation =
             `graffitiFloat ${2 + Math.random() * 3}s ease-in-out infinite`;
@@ -183,44 +165,142 @@ function createBirthdayWall() {
         wall.appendChild(text);
     }
 
-    // Confetti / sprinkles
+
+    // ======================================
+    // 🎉 CONFETTI
+    // ======================================
+
     createConfetti(cakeScreen);
 
-    // Show the wall for a while
+
+    // ======================================
+    // CONTINUE BUTTON
+    // ======================================
+
     setTimeout(() => {
 
-        // Smoothly go to finale
-        goToScreen("finale");
+        const continueButton =
+            document.createElement("button");
 
-    }, 5000);
+        continueButton.id =
+            "graffiti-continue";
+
+        continueButton.textContent =
+            "Okay… continue 👀";
+
+        continueButton.style.position =
+            "fixed";
+
+        continueButton.style.left =
+            "50%";
+
+        continueButton.style.bottom =
+            "45px";
+
+        continueButton.style.transform =
+            "translateX(-50%)";
+
+        continueButton.style.zIndex =
+            "200";
+
+        continueButton.style.padding =
+            "15px 25px";
+
+        continueButton.style.border =
+            "none";
+
+        continueButton.style.borderRadius =
+            "30px";
+
+        continueButton.style.background =
+            "white";
+
+        continueButton.style.color =
+            "#171027";
+
+        continueButton.style.fontSize =
+            "16px";
+
+        continueButton.style.fontWeight =
+            "800";
+
+        continueButton.style.cursor =
+            "pointer";
+
+        continueButton.style.boxShadow =
+            "0 10px 30px rgba(0,0,0,0.25)";
+
+        continueButton.style.animation =
+            "buttonAppear 0.6s ease forwards";
+
+
+        continueButton.onclick = () => {
+
+            // Remove graffiti elements
+            if (wall) wall.remove();
+
+            const confetti =
+                document.getElementById(
+                    "birthday-confetti"
+                );
+
+            if (confetti) {
+                confetti.remove();
+            }
+
+            continueButton.remove();
+
+            // Go to Magic Button
+            goToScreen("finale");
+
+            // Reset finale
+            resetFinale();
+        };
+
+
+        cakeScreen.appendChild(
+            continueButton
+        );
+
+    }, 2500);
 }
 
 
-// ===============================
+// ==========================================
 // 🎉 CONFETTI
-// ===============================
+// ==========================================
 
 function createConfetti(container) {
-
-    const oldConfetti =
-        document.getElementById("birthday-confetti");
-
-    if (oldConfetti) {
-        oldConfetti.remove();
-    }
 
     const confetti =
         document.createElement("div");
 
-    confetti.id = "birthday-confetti";
+    confetti.id =
+        "birthday-confetti";
 
-    confetti.style.position = "absolute";
-    confetti.style.inset = "0";
-    confetti.style.overflow = "hidden";
-    confetti.style.pointerEvents = "none";
-    confetti.style.zIndex = "15";
+    confetti.style.position =
+        "fixed";
+
+    confetti.style.inset =
+        "0";
+
+    confetti.style.width =
+        "100vw";
+
+    confetti.style.height =
+        "100vh";
+
+    confetti.style.overflow =
+        "hidden";
+
+    confetti.style.pointerEvents =
+        "none";
+
+    confetti.style.zIndex =
+        "150";
 
     container.appendChild(confetti);
+
 
     const symbols = [
         "✨",
@@ -229,27 +309,34 @@ function createConfetti(container) {
         "💫",
         "🥳",
         "🎊",
-        "•"
+        "💖",
+        "⭐"
     ];
 
-    for (let i = 0; i < 60; i++) {
+
+    for (let i = 0; i < 70; i++) {
 
         const piece =
             document.createElement("span");
 
         piece.textContent =
-            symbols[Math.floor(Math.random() * symbols.length)];
+            symbols[
+                Math.floor(
+                    Math.random() * symbols.length
+                )
+            ];
 
-        piece.style.position = "absolute";
+        piece.style.position =
+            "absolute";
 
         piece.style.left =
-            Math.random() * 100 + "%";
+            Math.random() * 100 + "vw";
 
         piece.style.top =
-            Math.random() * 100 + "%";
+            Math.random() * 100 + "vh";
 
         piece.style.fontSize =
-            (10 + Math.random() * 20) + "px";
+            (12 + Math.random() * 22) + "px";
 
         piece.style.animation =
             `confettiFloat ${2 + Math.random() * 4}s ease-in-out infinite`;
@@ -262,11 +349,50 @@ function createConfetti(container) {
 }
 
 
-// ===============================
+// ==========================================
 // 😈 MAGIC BUTTON
-// ===============================
+// ==========================================
 
 let magicClicks = 0;
+
+
+function resetFinale() {
+
+    magicClicks = 0;
+
+    const message =
+        document.getElementById("magicMessage");
+
+    const button =
+        document.getElementById("magicButton");
+
+    if (message) {
+        message.innerHTML = "";
+    }
+
+    if (button) {
+
+        button.style.display =
+            "inline-block";
+
+        button.style.transform =
+            "scale(1)";
+
+        button.textContent =
+            "DO NOT CLICK";
+
+        button.onclick =
+            magicClick;
+    }
+
+    const oldHeart =
+        document.getElementById("hidden-heart");
+
+    if (oldHeart) {
+        oldHeart.remove();
+    }
+}
+
 
 function magicClick() {
 
@@ -278,169 +404,215 @@ function magicClick() {
     const button =
         document.getElementById("magicButton");
 
-    if (!message || !button) return;
-
 
     if (magicClicks === 1) {
 
         message.innerHTML =
             "I told you not to click it. 👀";
 
-        button.innerHTML =
+        button.textContent =
             "CLICK AGAIN 😈";
-
     }
+
 
     else if (magicClicks === 2) {
 
         message.innerHTML =
             "Seriously? 😭";
 
-        button.innerHTML =
+        button.textContent =
             "ONE MORE";
 
         document.body.style.transform =
             "rotate(1deg)";
-
     }
+
 
     else if (magicClicks === 3) {
 
         message.innerHTML =
             "WHY ARE YOU STILL CLICKING IT 💀";
 
-        button.innerHTML =
+        button.textContent =
             "OKAY FINE";
 
         button.style.transform =
             "scale(1.15)";
-
     }
+
 
     else if (magicClicks === 4) {
 
         message.innerHTML =
             "Okay fine... you win. 💯";
 
-        button.innerHTML =
+        button.textContent =
             "WAIT... 👀";
 
         button.style.transform =
             "scale(1)";
     }
 
+
     else {
 
-        // Reset the tiny screen rotation
         document.body.style.transform =
             "none";
 
-        // Start hidden-heart section
-        createHiddenHeart();
+        // Remove button
+        button.style.display =
+            "none";
 
+        // Start hidden heart
+        showHiddenHeart();
     }
 }
 
 
-// ===============================
+// ==========================================
 // 💗 HIDDEN HEART
-// ===============================
+// ==========================================
 
-function createHiddenHeart() {
+function showHiddenHeart() {
 
     const finale =
         document.getElementById("finale");
 
-    if (!finale) return;
-
-    // Hide the button
-    const button =
-        document.getElementById("magicButton");
-
-    if (button) {
-        button.style.display = "none";
-    }
-
     const message =
         document.getElementById("magicMessage");
 
+    if (!finale) return;
+
+
     if (message) {
+
         message.innerHTML =
-            "Wait... something is hiding here. 👀<br><br>Find it.";
+            "Okay... one last thing. 👀<br><br>" +
+            "<strong>Find the hidden heart.</strong>";
     }
 
-    // Create hidden heart
+
+    // Create heart
     const heart =
         document.createElement("div");
 
-    heart.id = "hidden-heart";
+    heart.id =
+        "hidden-heart";
 
-    heart.textContent = "💗";
+    heart.textContent =
+        "💗";
 
-    heart.style.position = "absolute";
+    heart.style.position =
+        "fixed";
 
     heart.style.left =
-        (10 + Math.random() * 80) + "%";
+        (10 + Math.random() * 80) + "vw";
 
     heart.style.top =
-        (15 + Math.random() * 70) + "%";
+        (15 + Math.random() * 65) + "vh";
 
     heart.style.fontSize =
-        "28px";
+        "32px";
 
     heart.style.cursor =
         "pointer";
 
+    heart.style.zIndex =
+        "500";
+
     heart.style.opacity =
-        "0.15";
+        "0.3";
+
+    heart.style.filter =
+        "blur(0.5px)";
 
     heart.style.transition =
         "all 0.4s ease";
 
-    heart.style.zIndex =
-        "100";
+    heart.style.animation =
+        "heartPulse 1.5s ease-in-out infinite";
 
-    heart.title =
-        "You found me 👀";
+
+    // Make it easier to notice when cursor is near
+    heart.addEventListener(
+        "mouseenter",
+        () => {
+
+            heart.style.opacity =
+                "1";
+
+            heart.style.transform =
+                "scale(1.35)";
+        }
+    );
+
+
+    heart.addEventListener(
+        "mouseleave",
+        () => {
+
+            heart.style.opacity =
+                "0.3";
+
+            heart.style.transform =
+                "scale(1)";
+        }
+    );
+
+
+    // Mobile tap
+    heart.addEventListener(
+        "click",
+        heartFound
+    );
+
 
     finale.appendChild(heart);
-
-
-    // Make it slightly noticeable
-    setTimeout(() => {
-
-        heart.style.opacity =
-            "0.35";
-
-    }, 1500);
-
-
-    // Click / tap
-    heart.addEventListener("click", () => {
-
-        heart.style.transform =
-            "scale(4)";
-
-        heart.style.opacity =
-            "1";
-
-        if (message) {
-
-            message.innerHTML =
-                "YOU FOUND IT 💗<br><br>" +
-                "Okay... NOW we're actually done. 😭";
-
-        }
-
-        createFinalCelebration();
-
-    });
 }
 
 
-// ===============================
-// 🎉 FINAL CELEBRATION
-// ===============================
+// ==========================================
+// 💗 HEART FOUND
+// ==========================================
+
+function heartFound() {
+
+    const heart =
+        document.getElementById(
+            "hidden-heart"
+        );
+
+    const message =
+        document.getElementById(
+            "magicMessage"
+        );
+
+
+    if (heart) {
+
+        heart.style.animation =
+            "heartFound 0.8s ease forwards";
+
+        heart.style.opacity =
+            "1";
+    }
+
+
+    if (message) {
+
+        message.innerHTML =
+            "YOU FOUND IT 💗<br><br>" +
+            "Okay... NOW we're actually done. 😭";
+    }
+
+
+    createFinalCelebration();
+}
+
+
+// ==========================================
+// 🎊 FINAL CELEBRATION
+// ==========================================
 
 function createFinalCelebration() {
 
@@ -449,11 +621,15 @@ function createFinalCelebration() {
 
     if (!finale) return;
 
+
     const celebration =
         document.createElement("div");
 
+    celebration.id =
+        "final-celebration";
+
     celebration.style.position =
-        "absolute";
+        "fixed";
 
     celebration.style.inset =
         "0";
@@ -462,9 +638,11 @@ function createFinalCelebration() {
         "none";
 
     celebration.style.zIndex =
-        "50";
+        "600";
 
-    finale.appendChild(celebration);
+    finale.appendChild(
+        celebration
+    );
 
 
     const symbols = [
@@ -474,11 +652,12 @@ function createFinalCelebration() {
         "🥳",
         "🎂",
         "💫",
-        "💋"
+        "💋",
+        "🎊"
     ];
 
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
 
         const item =
             document.createElement("span");
@@ -494,10 +673,10 @@ function createFinalCelebration() {
             "absolute";
 
         item.style.left =
-            Math.random() * 100 + "%";
+            Math.random() * 100 + "vw";
 
         item.style.top =
-            "-30px";
+            "-40px";
 
         item.style.fontSize =
             (15 + Math.random() * 25) + "px";
@@ -512,18 +691,18 @@ function createFinalCelebration() {
     }
 
 
-    // Go to Bye screen after celebration
+    // Go to Bye ONLY after the heart is found
     setTimeout(() => {
 
         goToScreen("bye");
 
-    }, 5500);
+    }, 5000);
 }
 
 
-// ===============================
-// ✨ ADD REQUIRED ANIMATIONS
-// ===============================
+// ==========================================
+// ✨ ANIMATIONS
+// ==========================================
 
 const animationStyle =
     document.createElement("style");
@@ -550,22 +729,63 @@ animationStyle.innerHTML = `
 
 @keyframes confettiFloat {
 
-    0% {
+    0%, 100% {
         transform:
-            translateY(-10px)
+            translateY(0)
             rotate(0deg);
     }
 
     50% {
         transform:
-            translateY(15px)
+            translateY(-18px)
             rotate(180deg);
+    }
+}
+
+
+@keyframes buttonAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+}
+
+
+@keyframes heartPulse {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+
+@keyframes heartFound {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(3);
     }
 
     100% {
-        transform:
-            translateY(-10px)
-            rotate(360deg);
+        transform: scale(8);
+        opacity: 0;
     }
 }
 
@@ -574,7 +794,7 @@ animationStyle.innerHTML = `
 
     0% {
         transform:
-            translateY(-30px)
+            translateY(-40px)
             rotate(0deg);
         opacity: 0;
     }
@@ -587,7 +807,7 @@ animationStyle.innerHTML = `
         transform:
             translateY(110vh)
             rotate(360deg);
-        opacity: 0.9;
+        opacity: 1;
     }
 }
 
@@ -624,4 +844,6 @@ animationStyle.innerHTML = `
 
 `;
 
-document.head.appendChild(animationStyle);
+document.head.appendChild(
+    animationStyle
+);
