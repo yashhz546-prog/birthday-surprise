@@ -333,3 +333,564 @@ button:active {
         padding: 14px 22px;
     }
 }
+/* =========================================
+   🎂 BIRTHDAY SCREEN — POLISHED VERSION
+   ========================================= */
+
+#birthday {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(255, 255, 255, 0.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #160d35,
+            #321467,
+            #4b1d82
+        );
+}
+
+
+/* =========================================
+   BACKGROUND GLOW
+   ========================================= */
+
+.birthday-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.glow-one {
+    width: 280px;
+    height: 280px;
+    background: rgba(255, 120, 190, 0.35);
+    top: -100px;
+    left: -80px;
+    animation: glowFloatOne 7s ease-in-out infinite;
+}
+
+.glow-two {
+    width: 320px;
+    height: 320px;
+    background: rgba(120, 180, 255, 0.25);
+    bottom: -140px;
+    right: -100px;
+    animation: glowFloatTwo 8s ease-in-out infinite;
+}
+
+@keyframes glowFloatOne {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(50px, 40px);
+    }
+}
+
+@keyframes glowFloatTwo {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-40px, -30px);
+    }
+}
+
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+
+.birthday-content {
+    position: relative;
+    z-index: 10;
+
+    width: min(90%, 700px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    animation: birthdayContentIn 1.1s ease forwards;
+}
+
+@keyframes birthdayContentIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   SMALL TITLE
+   ========================================= */
+
+.birthday-mini {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 4px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    margin-bottom: 14px;
+
+    animation: miniFade 1.2s ease forwards;
+}
+
+@keyframes miniFade {
+
+    from {
+        opacity: 0;
+        letter-spacing: 8px;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: 4px;
+    }
+}
+
+
+/* =========================================
+   HAPPY BIRTHDAY TITLE
+   ========================================= */
+
+.birthday-title {
+    margin: 0;
+
+    font-size: clamp(48px, 8vw, 88px);
+
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    letter-spacing: -3px;
+
+    color: white;
+
+    text-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25);
+
+    animation:
+        birthdayTitleIn 1s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes birthdayTitleIn {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.85)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* =========================================
+   CAKE
+   ========================================= */
+
+.birthday-cake {
+    font-size: clamp(65px, 11vw, 105px);
+
+    margin-top: 30px;
+    margin-bottom: 18px;
+
+    display: inline-block;
+
+    animation:
+        birthdayCakeFloat 3s ease-in-out infinite,
+        birthdayCakeAppear 1.2s ease forwards;
+
+    filter:
+        drop-shadow(
+            0 15px 25px rgba(0, 0, 0, 0.25)
+        );
+}
+
+@keyframes birthdayCakeAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes birthdayCakeFloat {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+
+/* =========================================
+   SUBTITLE
+   ========================================= */
+
+.birthday-subtitle {
+    margin: 0;
+
+    max-width: 460px;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    animation:
+        subtitleAppear 1.3s ease forwards;
+}
+
+@keyframes subtitleAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   SURPRISE BUTTON
+   ========================================= */
+
+.birthday-surprise-btn {
+    margin-top: 30px;
+
+    border: none;
+
+    padding:
+        16px 28px;
+
+    border-radius: 999px;
+
+    background: white;
+
+    color: #241044;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation:
+        buttonBirthdayAppear 1.5s ease forwards;
+}
+
+.birthday-surprise-btn:hover {
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+.birthday-surprise-btn:active {
+    transform:
+        scale(0.96);
+}
+
+@keyframes buttonBirthdayAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   FLOATING DECORATIONS
+   ========================================= */
+
+.birthday-decoration {
+    position: absolute;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 30px;
+
+    pointer-events: none;
+
+    animation:
+        decorationFloat 4s ease-in-out infinite;
+}
+
+.decor-one {
+    top: 16%;
+    left: 12%;
+    animation-delay: 0s;
+}
+
+.decor-two {
+    top: 27%;
+    right: 14%;
+    font-size: 42px;
+    animation-delay: 1s;
+}
+
+.decor-three {
+    bottom: 18%;
+    left: 17%;
+    font-size: 38px;
+    animation-delay: 2s;
+}
+
+.decor-four {
+    bottom: 25%;
+    right: 12%;
+    animation-delay: 0.5s;
+}
+
+@keyframes decorationFloat {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-5deg);
+        opacity: 0.55;
+    }
+
+    50% {
+        transform:
+            translateY(-14px)
+            rotate(8deg);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   🎈 BALLOONS
+   ========================================= */
+
+.birthday-balloon {
+    position: absolute;
+
+    font-size: 65px;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 12px 15px rgba(0, 0, 0, 0.18)
+        );
+}
+
+.balloon-pink {
+    left: 7%;
+    bottom: 13%;
+
+    animation:
+        balloonFloatLeft 5s ease-in-out infinite;
+}
+
+.balloon-yellow {
+    left: 17%;
+    top: 12%;
+
+    font-size: 48px;
+
+    animation:
+        balloonFloatSmall 4s ease-in-out infinite;
+}
+
+.balloon-blue {
+    right: 7%;
+    bottom: 15%;
+
+    font-size: 72px;
+
+    animation:
+        balloonFloatRight 5.5s ease-in-out infinite;
+}
+
+.balloon-purple {
+    right: 18%;
+    top: 13%;
+
+    font-size: 50px;
+
+    animation:
+        balloonFloatSmall 4.5s ease-in-out infinite;
+}
+
+@keyframes balloonFloatLeft {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-6deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(6deg);
+    }
+}
+
+@keyframes balloonFloatRight {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(5deg);
+    }
+
+    50% {
+        transform:
+            translateY(-30px)
+            rotate(-5deg);
+    }
+}
+
+@keyframes balloonFloatSmall {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-4deg);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(5deg);
+    }
+}
+
+
+/* =========================================
+   📱 MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .birthday-content {
+        width: 88%;
+    }
+
+    .birthday-mini {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+    }
+
+    .birthday-title {
+        font-size: clamp(43px, 13vw, 65px);
+        letter-spacing: -2px;
+    }
+
+    .birthday-cake {
+        font-size: 72px;
+        margin-top: 25px;
+    }
+
+    .birthday-subtitle {
+        font-size: 15px;
+        max-width: 320px;
+    }
+
+    .birthday-surprise-btn {
+        padding: 15px 23px;
+        font-size: 15px;
+    }
+
+    .birthday-balloon {
+        font-size: 45px;
+    }
+
+    .balloon-yellow,
+    .balloon-purple {
+        font-size: 35px;
+    }
+
+    .balloon-pink {
+        left: 2%;
+        bottom: 8%;
+    }
+
+    .balloon-blue {
+        right: 2%;
+        bottom: 9%;
+    }
+
+    .decor-one {
+        left: 8%;
+        top: 20%;
+    }
+
+    .decor-two {
+        right: 8%;
+        top: 20%;
+    }
+
+    .decor-three {
+        left: 10%;
+        bottom: 25%;
+    }
+
+    .decor-four {
+        right: 9%;
+        bottom: 27%;
+    }
+}
